@@ -6,6 +6,18 @@
      crossorigin="anonymous"></script>
     <link rel="icon" href="https://raw.githubusercontent.com/pythonstarteruser/Ciekawostki-o-Malcie/refs/heads/main/Obrazy/MaltaLogo.ico">
     <style>
+        .fade-in {
+    opacity: 0;              /* niewidoczne na start */
+    transform: translateY(20px); /* lekko przesunięte w dół */
+    animation: fadeInAnim 1.5s forwards; /* animacja 1.5s */
+}
+
+@keyframes fadeInAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
         body {
             background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/3188.jpg");
             background-size: cover;
@@ -117,6 +129,7 @@
     </main>
 </body>
 </html>
+
 
 
 
