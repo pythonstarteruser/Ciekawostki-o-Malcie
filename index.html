@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
+    <p class="scroll-fade">Tutaj pojawia się ciekawostka dopiero, gdy przewiniesz stronę!</p>
 <head>
-    <meta name="google-adsense-account" content="ca-pub-3274914678989784">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3274914678989784"
-     crossorigin="anonymous"></script>
+    .scroll-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
+
+.scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
     <link rel="icon" href="https://raw.githubusercontent.com/pythonstarteruser/Ciekawostki-o-Malcie/refs/heads/main/Obrazy/MaltaLogo.ico">
     <style>
         .fade-in {
@@ -124,11 +132,27 @@
             </details>
         </h3>
         <h3><p style="color: yellow;">Koniecznie odwiedź Balluta Bay Beach i Mellieha Beach</p></h3>
+        <script>
+const elements = document.querySelectorAll('.scroll-fade');
+
+window.addEventListener('scroll', () => {
+    const triggerBottom = window.innerHeight * 0.9;
+
+    elements.forEach(el => {
+        const elTop = el.getBoundingClientRect().top;
+
+        if (elTop < triggerBottom) {
+            el.classList.add('visible');
+        }
+    });
+});
+</script>
 
         <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=wnq1f2cSi029g4qJgRbJDBavn5DuFEtPsb0NC1V04_xUNjAzTzJGSjNaUE00UlZTQ0s0WkpWTVhTUS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
     </main>
 </body>
 </html>
+
 
 
 
