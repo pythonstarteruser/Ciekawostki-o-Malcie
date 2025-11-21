@@ -1,25 +1,75 @@
 <!DOCTYPE html>
    <head>
-	   <link rel="icon" href="https://raw.githubusercontent.com/pythonstarteruser/Ciekawostki-o-Malcie/refs/heads/main/Obrazy/MaltaLogo.ico">
-	<style>
-	body {
-		background-image: url("https://wallpapercave.com/wp/wp2038502.jpg");
-		background-size: cover;
-		max-width: 800px;
-		margin: auto;
-		line-height: 1.6;
-		padding: 20px;
-		}
-		img {
-			max-width: 100%;
-			border-radius: 10px;
-			box-shadow: 0 4px 10px rgba(0,0,0,0,15);
-		}	
-		</style>   
-     <title> Malta-o mnie </title>
-   </head>
-   <body>
-	    <h1 class="fade-in">Ciekawostki o Malcie</h1> 
+	    <link rel="icon" href="https://raw.githubusercontent.com/pythonstarteruser/Ciekawostki-o-Malcie/refs/heads/main/Obrazy/MaltaLogo.ico">
+    <style>
+        .fade-in {
+    opacity: 0;              /* niewidoczne na start */
+    transform: translateY(20px); /* lekko przesunięte w dół */
+    animation: fadeInAnim 1.5s forwards; /* animacja 1.5s */
+}
+
+@keyframes fadeInAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+        body {
+            background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/3188.jpg");
+            background-size: cover;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.6;
+            padding: 20px;
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        
+        .promo-left, .promo-right {
+            position: fixed;
+            top: 100px;
+            width: 160px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .promo-left {
+            left: 10px;
+        }
+
+        .promo-right {
+            right: 10px;
+        }
+
+        .promo-left img, .promo-right img {
+            width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        .promo-left img:hover, .promo-right img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 800px) {
+            .promo-left, .promo-right {
+                display: none;
+            }
+        }
+    </style>
+    <title>Malta-O mnie</title>
+</head>
+<body>
+   <h1 class="fade-in">Ciekawostki o Malcie</h1> 
     <div class="promo-left">
         <a href="https://ubuntu.com" target="_blank">
             <img src="https://raw.githubusercontent.com/pythonstarteruser/Ciekawostki-o-Malcie/refs/heads/main/Obrazy/Ubuntu.png" alt="Ubuntu">
