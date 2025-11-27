@@ -192,6 +192,92 @@ body {
   }
 })();'
 </iframe>
+        <h2>Zdrapka o Prezydencie Malty
+            <!-- Zdrapka z prezydentem Malty -->
+<div class="scratch-card">
+  <canvas id="scratchCanvas" width="400" height="300"></canvas>
+  <div class="hidden-content">
+    <h3>Prezydent Malty</h3>
+    <p>Myriam Spiteri Debono</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Myriam_Spiteri_Debono_on_April_20%2C_2024_%28cropped%29.jpg" alt="Prezydent Malty" width="200">
+  </div>
+</div>
+
+<style>
+.scratch-card {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  margin: 20px auto;
+  border: 2px solid #555;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.hidden-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
+
+<script>
+const canvas = document.getElementById('scratchCanvas');
+const ctx = canvas.getContext('2d');
+const width = canvas.width;
+const height = canvas.height;
+
+// Zakrycie obrazu kolorem szarym
+ctx.fillStyle = '#888';
+ctx.fillRect(0, 0, width, height);
+ctx.globalCompositeOperation = 'destination-out';
+
+let isDrawing = false;
+
+canvas.addEventListener('mousedown', () => isDrawing = true);
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
+canvas.addEventListener('mousemove', (e) => {
+  if(!isDrawing) return;
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  ctx.beginPath();
+  ctx.arc(x, y, 20, 0, Math.PI * 2);
+  ctx.fill();
+});
+
+// Automatyczne odsłonięcie po 70% zdrapania
+function checkScratch() {
+  const imgData = ctx.getImageData(0,0,width,height);
+  let cleared = 0;
+  for(let i=0;i<imgData.data.length;i+=4){
+    if(imgData.data[i+3] === 0) cleared++;
+  }
+  if(cleared / (width*height) > 0.7) {
+    canvas.style.display = 'none';
+  } else {
+    requestAnimationFrame(checkScratch);
+  }
+}
+checkScratch();
+</script>
 
         <h2><li> Stolicą Malty jest Valletta, nazywana niekiedy "muzeum pod gołym niebem".
         Jest najdalej wysuniętą na południe stolicą europejską i jednym z najbardziej zagęszczonych obszarów zabytkowych na świecie (posiada 320 zabytków). Znajduje się na liście światowego dziedzictwa UNESCO. Valletta jest najbardziej słoneczną miejscowością Europy.</h2></li>
@@ -324,6 +410,7 @@ window.addEventListener('scroll', () => {
     </main>
 </body>
 </html>
+
 
 
 
