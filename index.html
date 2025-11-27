@@ -122,6 +122,76 @@ body {
 <li>Wiele budynków ma charakterystyczne kolorowe, drewniane balkony zwane “gallarija”.</li>
 </ul>
 
+  <h2>Pogoda z Malty
+      <!-- IFRAME: aktualna pogoda w Valletcie (Open-Meteo) -->
+<iframe
+    title="Pogoda Valletta"
+    style="width:100%;max-width:420px;height:140px;border:0;border-radius:10px;overflow:hidden;"
+    srcdoc='
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#0b1220;color:#e6f7ff;margin:0;padding:12px;box-sizing:border-box;}
+  .card{display:flex;align-items:center;gap:12px;}
+  .icon{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,#00334d,#005f7a);display:flex;align-items:center;justify-content:center;font-size:28px;}
+  .info{flex:1;}
+  .place{font-weight:700;font-size:15px;}
+  .temp{font-size:28px;font-weight:700;margin-top:4px;}
+  .meta{font-size:13px;color:#cfeff8;margin-top:6px;}
+  .small{font-size:12px;color:#99cbd6;margin-top:8px;}
+</style>
+</head>
+<body>
+<div id="root"><div class="place">Ładowanie pogody…</div></div>
+<script>
+(async ()=>{
+  try{
+    const lat=35.8989, lon=14.5146;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error("Błąd pobierania");
+    const data = await res.json();
+    const cur = data.current_weather;
+    const weatherCode = cur.weathercode;
+    // prosty opis wg. głównych kodów (Open-Meteo weathercode)
+    const codeMap = {
+      0: "Czyste niebo",
+      1: "Głównie słonecznie",
+      2: "Częściowo chmurzaste",
+      3: "Całkowite zachmurzenie",
+      45: "Mgła",
+      48: "Osadzanie lodu (szron)",
+      51: "Lekki mròz (deszczowy)",
+      53: "Umiarkowany deszczowy",
+      55: "Gęsty deszczowy",
+      61: "Opady deszczu",
+      63: "Umiarkowane opady deszczu",
+      65: "Silne opady deszczu",
+      71: "Opady śniegu",
+      80: "Przelotne opady deszczu",
+      95: "Burze"
+    };
+    const desc = codeMap[weatherCode] || "Warunki: kodeks " + weatherCode;
+    const html = `
+      <div class="card">
+        <div class="icon">☀️</div>
+        <div class="info">
+          <div class="place">Valletta, Malta</div>
+          <div class="temp">${Math.round(cur.temperature)}°C</div>
+          <div class="meta">${desc} · Wiatr ${Math.round(cur.windspeed)} km/h</div>
+          <div class="small">Ostatnia aktualizacja: ${new Date(cur.time).toLocaleString()}</div>
+        </div>
+      </div>`;
+    document.getElementById("root").innerHTML = html;
+  }catch(e){
+    document.getElementById("root").innerHTML = "<div style=\"color:#ffbdbd\">Nie udało się pobrać pogody.</div>";
+    console.error(e);
+  }
+})();'
+</iframe>
 
         <h2><li> Stolicą Malty jest Valletta, nazywana niekiedy "muzeum pod gołym niebem".
         Jest najdalej wysuniętą na południe stolicą europejską i jednym z najbardziej zagęszczonych obszarów zabytkowych na świecie (posiada 320 zabytków). Znajduje się na liście światowego dziedzictwa UNESCO. Valletta jest najbardziej słoneczną miejscowością Europy.</h2></li>
@@ -254,6 +324,7 @@ window.addEventListener('scroll', () => {
     </main>
 </body>
 </html>
+
 
 
 
