@@ -81,7 +81,36 @@ body {
    <h1 class="fade-in">Ciekawostki o Malcie</h1> 
     <div class="promo-left">
         
+        
     </div>
+<!-- Pasek postępu czytania (wszystko w jednym) -->
+<div id="readingProgress"></div>
+
+<script>
+/* Tworzymy styl paska */
+const style = document.createElement('style');
+style.textContent = `
+#readingProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 5px;
+  background: linear-gradient(90deg, #00ffff, #0080ff);
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+}
+`;
+document.head.appendChild(style);
+
+/* Funkcja aktualizująca pasek podczas przewijania */
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrollPercent = (scrollTop / scrollHeight) * 100;
+  document.getElementById('readingProgress').style.width = scrollPercent + '%';
+});
+</script>
 
     <header>
         <nav>
@@ -410,6 +439,7 @@ window.addEventListener('scroll', () => {
     </main>
 </body>
 </html>
+
 
 
 
